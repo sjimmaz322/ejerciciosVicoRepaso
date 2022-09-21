@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  */
 public class Llamada {
     
-    private int id, numeroOrigen, numeroDestino;
+    private String id, numeroOrigen, numeroDestino;
     private LocalDateTime fechaHoraInicio, fechaHoraFin;
     
     
