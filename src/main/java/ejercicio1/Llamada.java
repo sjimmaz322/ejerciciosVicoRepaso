@@ -13,6 +13,20 @@ public class Llamada {
     private LocalDateTime fechaHoraInicio, fechaHoraFin;
 
     public Llamada() {
+        String id = "";
+        String numeroOrigen = "";
+        String numeroDestino = "";
+        LocalDateTime fechaHOraInicio = LocalDateTime.now();
+        LocalDateTime ferchaHoraFin = LocalDateTime.now();
+
+    }
+
+    public Llamada(String id, String numeroOrigen, String numeroDestino, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
+        this.id = id;
+        this.numeroOrigen = numeroOrigen;
+        this.numeroDestino = numeroDestino;
+        this.fechaHoraInicio = fechaHoraInicio;
+        this.fechaHoraFin = fechaHoraFin;
     }
 
     public String getId() {
@@ -96,10 +110,10 @@ public class Llamada {
     @Override
     public String toString() {
         return "Llamada con id: " + id
-                + "\nCon número de origen: " + numeroOrigen
-                + "\nCon número de destido: " + numeroDestino
-                + "\nIniciada en: " + fechaHoraInicio
-                + "\nFinalizada en :" + fechaHoraFin;
+                + ", con número de origen: " + numeroOrigen
+                + ", con número de destino: " + numeroDestino
+                + ", iniciada en: " + fechaHoraInicio
+                + " y finalizada en :" + fechaHoraFin + ".";
     }
 
 }
