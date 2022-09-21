@@ -68,7 +68,7 @@ public class EjerciciosVicoRepaso {
     private static Llamada rellenarLlamada() {
 
         Llamada aux = new Llamada();
-        String aniotx, mestxt, diatxt, horastxs, minutostxs;
+
         int anio, mes, dia, horas, minutos;
 
         aux.setId(JOptionPane.showInputDialog("Introduzca el identificador de la llamada (Sus iniciales) por favor"));
