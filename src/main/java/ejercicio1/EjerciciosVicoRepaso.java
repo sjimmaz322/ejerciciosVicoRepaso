@@ -7,8 +7,6 @@ package ejercicio1;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -24,6 +22,7 @@ public class EjerciciosVicoRepaso {
         ArrayList<Llamada> listadoLlamadas = new ArrayList<Llamada>();
 
         int eleccion, identificador = 1;
+        int contador = 0;
 
         do {
             eleccion = JOptionPane.YES_NO_OPTION;
@@ -31,11 +30,15 @@ public class EjerciciosVicoRepaso {
             if (JOptionPane.showConfirmDialog(null, "¿Desea registrar una llamada?", "Registro Llamadas",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 //Código para elección de si
-                JOptionPane.showMessageDialog(null, "Añadamos una llamada\nSe le guiará paso por paso para ello.\nNo se preocupe.");
-
+                if (contador == 0) {
+                    JOptionPane.showMessageDialog(null, "Añadamos una llamada\nSe le guiará paso por paso para ello.\nNo se preocupe.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Añadamos otra llamada entonces.");
+                }
                 Llamada llamada = rellenarLlamada();
 
                 listadoLlamadas.add(llamada);
+                contador++;
 
             } else {
                 String[] options = {"Consola", "Pantalla"};
@@ -70,7 +73,11 @@ public class EjerciciosVicoRepaso {
 
         aux.setId(JOptionPane.showInputDialog("Introduzca el identificador de la llamada (Sus iniciales) por favor"));
         do {
-            aux.setNumeroOrigen(JOptionPane.showInputDialog("Introduzca el número desde el que está llamando por favor"));
+            try {
+                aux.setNumeroOrigen(JOptionPane.showInputDialog("Introduzca el número desde el que está llamando por favor"));
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "El campo no puede ser dejado en blanco.");
+            }
         } while (aux.getNumeroOrigen().length() != 9);
         do {
             aux.setNumeroDestino(JOptionPane.showInputDialog("Introduzca el número al que ha llamado por favor"));
