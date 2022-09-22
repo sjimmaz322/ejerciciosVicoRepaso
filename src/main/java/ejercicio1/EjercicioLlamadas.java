@@ -7,7 +7,6 @@ package ejercicio1;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -63,16 +62,14 @@ public class EjercicioLlamadas {
 
             }
         } while (eleccion == 0);
-        
-        
+
 //        Period diferencia = getPeriod(listadoLlamadas.get(0).getFechaHoraInicio(),listadoLlamadas.get(0).getFechaHoraFin());
 //        System.out.println(diferencia.getDays());
     }
-    
+
 //    private static Period getPeriod(LocalDateTime dob, LocalDateTime now) {
 //        return Period.between(dob.toLocalDate(), now.toLocalDate());
 //    }
-
     private static Llamada rellenarLlamada() {
 
         Llamada aux = new Llamada();
