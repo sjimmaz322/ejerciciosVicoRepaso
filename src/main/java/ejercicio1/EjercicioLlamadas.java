@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author sajm
  */
-public class EjerciciosVicoRepaso {
+public class EjercicioLlamadas {
 
     public static void main(String[] args) {
 
