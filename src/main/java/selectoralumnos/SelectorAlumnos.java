@@ -68,8 +68,8 @@ public class SelectorAlumnos {
         } else {
             do {
                 elegidos = rd.nextInt(alumnos.length - 1);
-                result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnos[elegidos].toString(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
-
+                result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).toString(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
+                alumnado.remove(elegidos);
             } while (result != 0);
 
         }
