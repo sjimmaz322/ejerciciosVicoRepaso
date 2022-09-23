@@ -22,23 +22,18 @@ public class EjercicioLlamadas {
         ArrayList<Llamada> listadoLlamadas = new ArrayList<Llamada>();
 
         int eleccion, identificador = 1;
-        int contador = 0;
-
+        
         do {
             eleccion = JOptionPane.YES_NO_OPTION;
 
             if (JOptionPane.showConfirmDialog(null, "¿Desea registrar una llamada?", "Registro Llamadas",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 //Código para elección de si
-                if (contador == 0) {
-                    JOptionPane.showMessageDialog(null, "Añadamos una llamada\nSe le guiará paso por paso para ello.\nNo se preocupe.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Añadamos otra llamada entonces.");
-                }
+                
                 Llamada llamada = rellenarLlamada();
 
                 listadoLlamadas.add(llamada);
-                contador++;
+               
 
             } else {
                 String[] options = {"Consola", "Pantalla"};
