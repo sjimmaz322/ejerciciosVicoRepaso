@@ -61,7 +61,7 @@ public class SelectorAlumnos {
             JOptionPane.showMessageDialog(null, "Ánimo valiente.");
         } else {
             do {
-                elegidos = rd.nextInt(alumnado.size() - 1);
+                elegidos = rd.nextInt(alumnado.size());
                 result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).toString(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
                 alumnado.remove(elegidos);
             } while (result != 0);
