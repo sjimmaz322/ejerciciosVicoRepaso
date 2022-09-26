@@ -62,6 +62,7 @@ public class SelectorAlumnos {
         //Array para personalizar los botones
         String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "No está"};
 
+        //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
         if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Ánimo valiente.");
