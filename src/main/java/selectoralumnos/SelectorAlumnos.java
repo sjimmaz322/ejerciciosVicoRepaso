@@ -1,6 +1,5 @@
 package selectoralumnos;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -53,7 +52,7 @@ public class SelectorAlumnos {
         alumnado.add("José Ángel Tierra Vera");
         alumnado.add("Miguel Ángel Victoria Marín");
 
-        String[] opcion = {"Dame mi positivillo", "Soy un sinvergüenza", "Alumno ausente"};
+        String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "No está"};
 
         decision = JOptionPane.YES_NO_OPTION;
 
