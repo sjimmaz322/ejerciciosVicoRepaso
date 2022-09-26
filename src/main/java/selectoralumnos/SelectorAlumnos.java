@@ -15,10 +15,17 @@ public class SelectorAlumnos {
      */
     public static void main(String[] args) {
 
+        //Declaramos el objeto de la clase Random
         Random rd = new Random();
-        int elegidos, decision, result;
+
+        //Creamos las variables necesarias.
+        int elegidos, result;
         boolean valiente = true, tareas = true;
+
+        //Creamos en ArrayList para contener la lista de alumnos
         ArrayList<String> alumnado = new ArrayList<>();
+
+        //Rellenamos el ArrayList con los alumnos
         alumnado.add("Clara Isabel Álvarez Aragón");
         alumnado.add("Juan Antonio Barbero Mena");
         alumnado.add("Alberto Collado Araujo");
@@ -52,9 +59,8 @@ public class SelectorAlumnos {
         alumnado.add("José Ángel Tierra Vera");
         alumnado.add("Miguel Ángel Victoria Marín");
 
+        //Array para personalizar los botones
         String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "No está"};
-
-        decision = JOptionPane.YES_NO_OPTION;
 
         if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
