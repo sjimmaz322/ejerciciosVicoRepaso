@@ -66,22 +66,22 @@ public class SelectorAlumnos {
         if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Ánimo valiente.");
-        }else{
+        } else {
             do {
                 elegidos = rd.nextInt(alumnado.size());
                 result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).toString(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
-                alumnado.remove(elegidos);
-                switch(result){
+                switch (result) {
                     case 0:
-                        JOptionPane.showMessageDialog(null, "Muy bien "+alumnado.get(elegidos).toString()+" ,ganaste un positivillo.");
+                        JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).toString() + " ,ganaste un positivillo.");
                         break;
                     case 1:
-                        JOptionPane.showMessageDialog(null, "Mal vamos "+alumnado.get(elegidos).toString()+"...");
+                        JOptionPane.showMessageDialog(null, "Mal vamos " + alumnado.get(elegidos).toString() + "...");
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Pues nada, pasamos a otro.");
                         break;
                 }
+                alumnado.remove(elegidos);
             } while (result != 0);
 
         }
