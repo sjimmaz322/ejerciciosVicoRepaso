@@ -1,5 +1,8 @@
 package selectoralumnos;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -20,47 +23,73 @@ public class SelectorAlumnos {
 
         //Creamos las variables necesarias.
         int elegidos, result;
-        boolean valiente = true, tareas = true;
+
+        //Creamos el nombre y la ruta del archivo
+        String idFichero = "Alumnos.csv";
 
         //Creamos en ArrayList para contener la lista de alumnos
-        ArrayList<String> alumnado = new ArrayList<>();
+        ArrayList<Alumno> alumnado = new ArrayList<>();
 
         //Rellenamos el ArrayList con los alumnos
-        alumnado.add("Clara Isabel Álvarez Aragón");
-        alumnado.add("Juan Antonio Barbero Mena");
-        alumnado.add("Alberto Collado Araujo");
-        alumnado.add("Eduardo Correa Aranda");
-        alumnado.add("Guerig Eri Cuchallo Jaldin");
-        alumnado.add("Elisabet D'Acosta Almirón");
-        alumnado.add("Cristina Delgado Castillo");
-        alumnado.add("Erick G");
-        alumnado.add("José Ángel Gómez Morillo");
-        alumnado.add("Tomás Ariel González Atienza");
-        alumnado.add("Aiman Harrar Daoud");
-        alumnado.add("Jorge Hernández Puertas");
-        alumnado.add("Samuel Jiménez Mazas");
-        alumnado.add("Nerea López Sánchez");
-        alumnado.add("Maria Juliana Luna Giovanetti");
-        alumnado.add("Juan Diego Marín Morale");
-        alumnado.add("Adrián Martel Romero");
-        alumnado.add("Álvaro Martínez Flores");
-        alumnado.add("Fernando Martínez Ortiz");
-        alumnado.add("David Mena Jiménez");
-        alumnado.add("Pablo Navarro García");
-        alumnado.add("Alejandro Neal Chirino");
-        alumnado.add("Noelia Pérez González");
-        alumnado.add("Antonio Ramírez Navas");
-        alumnado.add("Alexey Riazantsev");
-        alumnado.add("Darío Rico García");
-        alumnado.add("José Antonio Ruiz Jiménez");
-        alumnado.add("Jose Ignacio Salcedo Guarde");
-        alumnado.add("Victoria Sampalo García");
-        alumnado.add("Ismael Shehata Pérez");
-        alumnado.add("José Ángel Tierra Vera");
-        alumnado.add("Miguel Ángel Victoria Marín");
+        alumnado.add(new Alumno("Clara Isabel Álvarez Aragón", 0, 0, 0));
+        alumnado.add(new Alumno("Juan Antonio Barbero Mena", 0, 0, 0));
+        alumnado.add(new Alumno("Alberto Collado Araujo", 0, 0, 0));
+        alumnado.add(new Alumno("Eduardo Correa Aranda", 0, 0, 0));
+        alumnado.add(new Alumno("Guerig Eri Cuchallo Jaldin", 0, 0, 0));
+        alumnado.add(new Alumno("Elisabet D'Acosta Almirón", 0, 0, 0));
+        alumnado.add(new Alumno("Cristina Delgado Castillo", 0, 0, 0));
+        alumnado.add(new Alumno("Erick G", 0, 0, 0));
+        alumnado.add(new Alumno("José Ángel Gómez Morillo", 0, 0, 0));
+        alumnado.add(new Alumno("Tomás Ariel González Atienza", 0, 0, 0));
+        alumnado.add(new Alumno("Aiman Harrar Daoud", 0, 0, 0));
+        alumnado.add(new Alumno("Jorge Hernández Puertas", 0, 0, 0));
+        alumnado.add(new Alumno("Samuel Jiménez Mazas", 0, 0, 0));
+        alumnado.add(new Alumno("Nerea López Sánchez", 0, 0, 0));
+        alumnado.add(new Alumno("Maria Juliana Luna Giovanetti", 0, 0, 0));
+        alumnado.add(new Alumno("Juan Diego Marín Morale", 0, 0, 0));
+        alumnado.add(new Alumno("Adrián Martel Romero", 0, 0, 0));
+        alumnado.add(new Alumno("Álvaro Martínez Flores", 0, 0, 0));
+        alumnado.add(new Alumno("Fernando Martínez Ortiz", 0, 0, 0));
+        alumnado.add(new Alumno("David Mena Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Pablo Navarro García", 0, 0, 0));
+        alumnado.add(new Alumno("Alejandro Neal Chirino", 0, 0, 0));
+        alumnado.add(new Alumno("Noelia Pérez González", 0, 0, 0));
+        alumnado.add(new Alumno("Antonio Ramírez Navas", 0, 0, 0));
+        alumnado.add(new Alumno("Alexey Riazantsev", 0, 0, 0));
+        alumnado.add(new Alumno("Darío Rico García", 0, 0, 0));
+        alumnado.add(new Alumno("José Antonio Ruiz Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Jose Ignacio Salcedo Guarde", 0, 0, 0));
+        alumnado.add(new Alumno("Victoria Sampalo García", 0, 0, 0));
+        alumnado.add(new Alumno("Ismael Shehata Pérez", 0, 0, 0));
+        alumnado.add(new Alumno("José Ángel Tierra Vera", 0, 0, 0));
+        alumnado.add(new Alumno("Miguel Ángel Victoria Marín", 0, 0, 0));
+
+        //Rellenamos el csv con los datos de los alumnos
+        try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(idFichero))) {
+
+            flujo.write("Lista de Alumnos" + ";");
+            flujo.write("Positivos" + ";");
+            flujo.write("Negativos" + ";");
+            flujo.write("Faltas");
+            flujo.newLine();
+
+            for (int i = 0; i < alumnado.size(); i++) {
+                flujo.write(alumnado.get(i).getNombre() + ";");
+                flujo.write(alumnado.get(i).getPositivos() + ";");
+                flujo.write(alumnado.get(i).getNegativos() + ";");
+                flujo.write(alumnado.get(i).getFaltas());
+                flujo.newLine();
+
+            }
+
+            flujo.flush();
+            System.out.println("Fichero " + idFichero + " creado correctamente.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         //Array para personalizar los botones
-        String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "No está"};
+        String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "Desaparecido en combate"};
 
         //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
         if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
@@ -69,13 +98,13 @@ public class SelectorAlumnos {
         } else {
             do {
                 elegidos = rd.nextInt(alumnado.size());
-                result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).toString(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
+                result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).getNombre(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
                 switch (result) {
                     case 0:
-                        JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).toString() + " ,ganaste un positivillo.");
+                        JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).getNombre() + ", ganaste un positivillo.");
                         break;
                     case 1:
-                        JOptionPane.showMessageDialog(null, "Mal vamos " + alumnado.get(elegidos).toString() + "...");
+                        JOptionPane.showMessageDialog(null, "Mal vamos " + alumnado.get(elegidos).getNombre() + "...");
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Pues nada, pasamos a otro.");
