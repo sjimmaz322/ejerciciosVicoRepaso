@@ -77,7 +77,7 @@ public class SelectorAlumnos {
                 flujo.write(alumnado.get(i).getNombre() + ";");
                 flujo.write(alumnado.get(i).getPositivos() + ";");
                 flujo.write(alumnado.get(i).getNegativos() + ";");
-                flujo.write(alumnado.get(i).getFaltas());
+                flujo.write(alumnado.get(i).getFaltas()+";");
                 flujo.newLine();
 
             }
