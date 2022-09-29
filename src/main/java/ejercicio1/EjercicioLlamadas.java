@@ -22,18 +22,17 @@ public class EjercicioLlamadas {
         ArrayList<Llamada> listadoLlamadas = new ArrayList<Llamada>();
 
         int eleccion, identificador = 1;
-        
+
         do {
             eleccion = JOptionPane.YES_NO_OPTION;
 
             if (JOptionPane.showConfirmDialog(null, "¿Desea registrar una llamada?", "Registro Llamadas",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 //Código para elección de si
-                
+
                 Llamada llamada = rellenarLlamada();
 
                 listadoLlamadas.add(llamada);
-               
 
             } else {
                 String[] options = {"Consola", "Pantalla"};
@@ -58,13 +57,8 @@ public class EjercicioLlamadas {
             }
         } while (eleccion == 0);
 
-//        Period diferencia = getPeriod(listadoLlamadas.get(0).getFechaHoraInicio(),listadoLlamadas.get(0).getFechaHoraFin());
-//        System.out.println(diferencia.getDays());
     }
 
-//    private static Period getPeriod(LocalDateTime dob, LocalDateTime now) {
-//        return Period.between(dob.toLocalDate(), now.toLocalDate());
-//    }
     private static Llamada rellenarLlamada() {
 
         Llamada aux = new Llamada();
