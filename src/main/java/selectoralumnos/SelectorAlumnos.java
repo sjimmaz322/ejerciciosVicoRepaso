@@ -162,7 +162,8 @@ public class SelectorAlumnos {
             //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
             if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                Object valiente = JOptionPane.showInputDialog(null, "¿Quién es el valiente?", "Valiente", JOptionPane.QUESTION_MESSAGE, null, listado, listado);
+                Object valiente = JOptionPane.showInputDialog(null, "¿Quién es el valiente?", "Valiente", JOptionPane.QUESTION_MESSAGE,
+                        null, listado, listado);
                 JOptionPane.showMessageDialog(null, "Ánimo " + valiente.toString() + ", ya tienes un positivillo");
                 for (int i = 0; i < alumnado.size(); i++) {
                     if (alumnado.get(i).getNombre().equalsIgnoreCase(valiente.toString())) {
@@ -173,7 +174,8 @@ public class SelectorAlumnos {
             } else {
                 do {
                     elegidos = rd.nextInt(alumnado.size());
-                    result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).getNombre(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
+                    result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).getNombre(), "Responde", 0,
+                            JOptionPane.QUESTION_MESSAGE, null, opcion, "");
                     switch (result) {
                         case 0:
                             JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).getNombre() + ", ganaste un positivillo.");
