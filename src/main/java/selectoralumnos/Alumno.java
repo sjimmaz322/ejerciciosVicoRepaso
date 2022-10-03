@@ -11,12 +11,13 @@ import java.util.Objects;
  * @author sajm <sjimmaz322 at sjimmaz322@g.educaand.es>
  */
 public class Alumno {
-    
-    private String nombre;
+
+    private String nombre, apellido;
     private int positivos, negativos, faltas;
 
-    public Alumno(String nombre, int positivos, int negativos, int faltas) {
+    public Alumno(String nombre, String apellido, int positivos, int negativos, int faltas) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.positivos = positivos;
         this.negativos = negativos;
         this.faltas = faltas;
@@ -24,6 +25,7 @@ public class Alumno {
 
     public Alumno() {
         this.nombre = "";
+        this.apellido = "";
         this.positivos = 0;
         this.negativos = 0;
         this.faltas = 0;
@@ -33,8 +35,8 @@ public class Alumno {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getApellido() {
+        return apellido;
     }
 
     public int getPositivos() {
@@ -64,10 +66,11 @@ public class Alumno {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.nombre);
-        hash = 41 * hash + this.positivos;
-        hash = 41 * hash + this.negativos;
-        hash = 41 * hash + this.faltas;
+        hash = 97 * hash + Objects.hashCode(this.nombre);
+        hash = 97 * hash + Objects.hashCode(this.apellido);
+        hash = 97 * hash + this.positivos;
+        hash = 97 * hash + this.negativos;
+        hash = 97 * hash + this.faltas;
         return hash;
     }
 
@@ -83,17 +86,15 @@ public class Alumno {
             return false;
         }
         final Alumno other = (Alumno) obj;
-        return Objects.equals(this.nombre, other.nombre);
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return Objects.equals(this.apellido, other.apellido);
     }
-
-    
 
     @Override
     public String toString() {
-        return "El alumno "+nombre+" tiene "+positivos+ " positivos, "+negativos+" y " + faltas + " faltas de asistencia registradas";
+        return "El alumno " + nombre + " " + apellido + " tiene " + positivos + " positivos, " + negativos + " y " + faltas + " faltas de asistencia registradas";
     }
-    
-    
-    
-    
+
 }
