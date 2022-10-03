@@ -215,13 +215,6 @@ public class SelectorAlumnos {
     }
 
     private static void actualizarDocumento(String ruta, ArrayList<Alumno> lista) {
-
-        lista.sort(Comparator.comparing(Alumno::getApellido));
-        for (Alumno alumno : lista) {
-            System.out.println(alumno.toString());
-
-        }
-
         //Misma estructura para escribir en el documento pero con las listas actualizadas
         //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(ruta))) {
