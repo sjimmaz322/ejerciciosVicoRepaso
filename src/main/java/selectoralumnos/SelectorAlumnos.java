@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -37,44 +39,45 @@ public class SelectorAlumnos {
         String idFichero = "Alumnos.csv";
 
         //Rellenamos el ArrayList con los alumnos
-        alumnado.add(new Alumno("Clara Isabel Álvarez Aragón", 0, 0, 0));
-        alumnado.add(new Alumno("Juan Antonio Barbero Mena", 0, 0, 0));
-        alumnado.add(new Alumno("Alberto Collado Araujo", 0, 0, 0));
-        alumnado.add(new Alumno("Eduardo Correa Aranda", 0, 0, 0));
-        alumnado.add(new Alumno("Guerig Eri Cuchallo Jaldin", 0, 0, 0));
-        alumnado.add(new Alumno("Elisabet D'Acosta Almirón", 0, 0, 0));
-        alumnado.add(new Alumno("Cristina Delgado Castillo", 0, 0, 0));
-        alumnado.add(new Alumno("Erick G", 0, 0, 0));
-        alumnado.add(new Alumno("José Ángel Gómez Morillo", 0, 0, 0));
-        alumnado.add(new Alumno("Tomás Ariel González Atienza", 0, 0, 0));
-        alumnado.add(new Alumno("Aiman Harrar Daoud", 0, 0, 0));
-        alumnado.add(new Alumno("Jorge Hernández Puertas", 0, 0, 0));
-        alumnado.add(new Alumno("Samuel Jiménez Mazas", 0, 0, 0));
-        alumnado.add(new Alumno("Nerea López Sánchez", 0, 0, 0));
-        alumnado.add(new Alumno("Maria Juliana Luna Giovanetti", 0, 0, 0));
-        alumnado.add(new Alumno("Juan Diego Marín Morale", 0, 0, 0));
-        alumnado.add(new Alumno("Adrián Martel Romero", 0, 0, 0));
-        alumnado.add(new Alumno("Álvaro Martínez Flores", 0, 0, 0));
-        alumnado.add(new Alumno("Fernando Martínez Ortiz", 0, 0, 0));
-        alumnado.add(new Alumno("David Mena Jiménez", 0, 0, 0));
-        alumnado.add(new Alumno("Pablo Navarro García", 0, 0, 0));
-        alumnado.add(new Alumno("Alejandro Neal Chirino", 0, 0, 0));
-        alumnado.add(new Alumno("Noelia Pérez González", 0, 0, 0));
-        alumnado.add(new Alumno("Antonio Ramírez Navas", 0, 0, 0));
-        alumnado.add(new Alumno("Alexey Riazantsev", 0, 0, 0));
-        alumnado.add(new Alumno("Darío Rico García", 0, 0, 0));
-        alumnado.add(new Alumno("José Antonio Ruiz Jiménez", 0, 0, 0));
-        alumnado.add(new Alumno("Jose Ignacio Salcedo Guarde", 0, 0, 0));
-        alumnado.add(new Alumno("Victoria Sampalo García", 0, 0, 0));
-        alumnado.add(new Alumno("Ismael Shehata Pérez", 0, 0, 0));
-        alumnado.add(new Alumno("José Ángel Tierra Vera", 0, 0, 0));
-        alumnado.add(new Alumno("Miguel Ángel Victoria Marín", 0, 0, 0));
+        alumnado.add(new Alumno("Clara Isabel", "Álvarez Aragón", 0, 0, 0));
+        alumnado.add(new Alumno("Juan Antonio", "Barbero Mena", 0, 0, 0));
+        alumnado.add(new Alumno("Alberto", "Collado Araujo", 0, 0, 0));
+        alumnado.add(new Alumno("Eduardo", "Correa Aranda", 0, 0, 0));
+        alumnado.add(new Alumno("Guerig Eri", "Cuchallo Jaldin", 0, 0, 0));
+        alumnado.add(new Alumno("Elisabet", "D'Acosta Almirón", 0, 0, 0));
+        alumnado.add(new Alumno("Cristina", "Delgado Castillo", 0, 0, 0));
+        alumnado.add(new Alumno("Erick", "G", 0, 0, 0));
+        alumnado.add(new Alumno("José Ángel", "Gómez Morillo", 0, 0, 0));
+        alumnado.add(new Alumno("Tomás Ariel", " González Atienza", 0, 0, 0));
+        alumnado.add(new Alumno("Aiman", " Harrar Daoud", 0, 0, 0));
+        alumnado.add(new Alumno("Jorge", " Hernández Puertas", 0, 0, 0));
+        alumnado.add(new Alumno("Samuel", " Jiménez Mazas", 0, 0, 0));
+        alumnado.add(new Alumno("Nerea", " López Sánchez", 0, 0, 0));
+        alumnado.add(new Alumno("Maria", " Juliana Luna Giovanetti", 0, 0, 0));
+        alumnado.add(new Alumno("Juan Diego", " Marín Morale", 0, 0, 0));
+        alumnado.add(new Alumno("Adrián", " Martel Romero", 0, 0, 0));
+        alumnado.add(new Alumno("Álvaro", " Martínez Flores", 0, 0, 0));
+        alumnado.add(new Alumno("Fernando", " Martínez Ortiz", 0, 0, 0));
+        alumnado.add(new Alumno("David", " Mena Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Pablo", " Navarro García", 0, 0, 0));
+        alumnado.add(new Alumno("Alejandro", " Neal Chirino", 0, 0, 0));
+        alumnado.add(new Alumno("Noelia", " Pérez González", 0, 0, 0));
+        alumnado.add(new Alumno("Antonio", " Ramírez Navas", 0, 0, 0));
+        alumnado.add(new Alumno("Alexey", " Riazantsev", 0, 0, 0));
+        alumnado.add(new Alumno("Darío", " Rico García", 0, 0, 0));
+        alumnado.add(new Alumno("José Antonio", " Ruiz Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Jose Ignacio", " Salcedo Guarde", 0, 0, 0));
+        alumnado.add(new Alumno("Victoria", " Sampalo García", 0, 0, 0));
+        alumnado.add(new Alumno("Ismael", " Shehata Pérez", 0, 0, 0));
+        alumnado.add(new Alumno("José Ángel", " Tierra Vera", 0, 0, 0));
+        alumnado.add(new Alumno("Miguel Ángel", " Victoria Marín", 0, 0, 0));
 
         //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(idFichero))) {
 
             //Guardamos el encabezado del documento
-            flujo.write("Lista de Alumnos" + ";");
+            flujo.write("Lista de" + ";");
+            flujo.write("Alumnos" + ";");
             flujo.write("Positivos" + ";");
             flujo.write("Negativos" + ";");
             flujo.write("Faltas" + ";");
@@ -83,6 +86,7 @@ public class SelectorAlumnos {
             //Por cada objeto creamos un registro
             for (int i = 0; i < alumnado.size(); i++) {
                 flujo.write(alumnado.get(i).getNombre() + ";");
+                flujo.write(alumnado.get(i).getApellido() + ";");
                 flujo.write(alumnado.get(i).getPositivos() + ";");
                 flujo.write(alumnado.get(i).getNegativos() + ";");
                 flujo.write(alumnado.get(i).getFaltas() + ";");
@@ -146,9 +150,9 @@ public class SelectorAlumnos {
                 // Se guarda en el array de String cada elemento de la
                 // línea en función del carácter separador de campos del fichero CSV
                 tokens = linea.split(";");
-                
+
                 //Añadimos cada parte del documento a un nuevo objeto Alumno
-                alumnado.add(new Alumno(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+                alumnado.add(new Alumno(tokens[0], tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
 
             }
             //Creamos una lista para mostrar los nombres de los alumnos en el menú desplegable
@@ -204,23 +208,36 @@ public class SelectorAlumnos {
             alumnado.add(alumnosQuitados.get(i));
 
         }
+
         //Llamamos al método actualizar documento
         actualizarDocumento(idFichero, alumnado);
 
     }
 
     private static void actualizarDocumento(String ruta, ArrayList<Alumno> lista) {
+
+        lista.sort(Comparator.comparing(Alumno::getApellido));
+        for (Alumno alumno : lista) {
+            System.out.println(alumno.toString());
+
+        }
+
         //Misma estructura para escribir en el documento pero con las listas actualizadas
+        //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(ruta))) {
 
-            flujo.write("Lista de Alumnos" + ";");
+            //Guardamos el encabezado del documento
+            flujo.write("Lista de" + ";");
+            flujo.write("Alumnos" + ";");
             flujo.write("Positivos" + ";");
             flujo.write("Negativos" + ";");
-            flujo.write("Faltas");
+            flujo.write("Faltas" + ";");
             flujo.newLine();
 
+            //Por cada objeto creamos un registro
             for (int i = 0; i < lista.size(); i++) {
                 flujo.write(lista.get(i).getNombre() + ";");
+                flujo.write(lista.get(i).getApellido() + ";");
                 flujo.write(lista.get(i).getPositivos() + ";");
                 flujo.write(lista.get(i).getNegativos() + ";");
                 flujo.write(lista.get(i).getFaltas() + ";");
@@ -228,10 +245,11 @@ public class SelectorAlumnos {
 
             }
 
-            flujo.flush();
-            System.out.println("Fichero " + ruta + " actualizado correctamente.");
+            flujo.flush();//Guardamos todo en el documento
+            System.out.println("Fichero " + ruta + " creado correctamente.");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
+
 }
