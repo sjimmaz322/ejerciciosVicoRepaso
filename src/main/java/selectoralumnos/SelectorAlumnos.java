@@ -1,10 +1,16 @@
 package selectoralumnos;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,17 +24,20 @@ public class SelectorAlumnos {
      */
     public static void main(String[] args) {
 
-        //Declaramos el objeto de la clase Random
-        Random rd = new Random();
+        //Comprobamos si el documento existe, en caso de que no exista lo creamos.
+        comprobarDocumento();
 
-        //Creamos las variables necesarias.
-        int elegidos, result;
+        //Elegimos al alumno que saldrá
+        elegirAlumno();
+
+    }
+
+    private static void crearDocumento() {
+        //Creamos en ArrayList para contener la lista de alumnos
+        ArrayList<Alumno> alumnado = new ArrayList<>();
 
         //Creamos el nombre y la ruta del archivo
         String idFichero = "Alumnos.csv";
-
-        //Creamos en ArrayList para contener la lista de alumnos
-        ArrayList<Alumno> alumnado = new ArrayList<>();
 
         //Rellenamos el ArrayList con los alumnos
         alumnado.add(new Alumno("Clara Isabel Álvarez Aragón", 0, 0, 0));
@@ -77,7 +86,7 @@ public class SelectorAlumnos {
                 flujo.write(alumnado.get(i).getNombre() + ";");
                 flujo.write(alumnado.get(i).getPositivos() + ";");
                 flujo.write(alumnado.get(i).getNegativos() + ";");
-                flujo.write(alumnado.get(i).getFaltas()+";");
+                flujo.write(alumnado.get(i).getFaltas() + ";");
                 flujo.newLine();
 
             }
@@ -88,33 +97,136 @@ public class SelectorAlumnos {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    private static void comprobarDocumento() {
+        String filePath = "Alumnos.csv";
+
+        Path path = Paths.get(filePath);
+
+        boolean existe = Files.exists(path);
+        boolean noExiste = Files.notExists(path);
+
+        if (existe) {
+            System.out.println("El Archivo ya existe");
+        } else {
+            System.out.println("El archivo no existe.\n Creando archivo.");
+            crearDocumento();
+        }
+    }
+
+    private static void elegirAlumno() {
+        //Declaramos el objeto de la clase Random
+        Random rd = new Random();
+
+        //Creamos las variables necesarias.
+        int elegidos, result;
+        String idFichero = "Alumnos.csv";
+        ArrayList<Alumno> alumnado = new ArrayList<>();
+        ArrayList<Alumno> alumnosQuitados = new ArrayList<>();
+        String[] listado = new String[32];
+
         //Array para personalizar los botones
         String[] opcion = {"¡Dame mi positivillo!", "Soy un sinvergüenza...", "Desaparecido en combate"};
 
-        //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
-        if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Ánimo valiente.");
-        } else {
-            do {
-                elegidos = rd.nextInt(alumnado.size());
-                result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).getNombre(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
-                switch (result) {
-                    case 0:
-                        JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).getNombre() + ", ganaste un positivillo.");
-                        break;
-                    case 1:
-                        JOptionPane.showMessageDialog(null, "Mal vamos " + alumnado.get(elegidos).getNombre() + "...");
-                        break;
-                    case 2:
-                        JOptionPane.showMessageDialog(null, "Pues nada, pasamos a otro.");
-                        break;
+        // Variables para guardar los datos que se van leyendo
+        String[] tokens;
+        String linea;
+
+        System.out.println("Leyendo el fichero: " + idFichero);
+
+        // Inicialización del flujo "datosFichero" en función del archivo llamado "idFichero"
+        // Estructura try-with-resources. Permite cerrar los recursos una vez finalizadas
+        // las operaciones con el archivo
+        try ( Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
+            // hasNextLine devuelve true mientras haya líneas por leer
+            datosFichero.nextLine();
+            while (datosFichero.hasNextLine()) {
+                // Guarda la línea completa en un String
+                linea = datosFichero.nextLine();
+                // Se guarda en el array de String cada elemento de la
+                // línea en función del carácter separador de campos del fichero CSV
+                tokens = linea.split(";");
+
+                alumnado.add(new Alumno(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+
+            }
+            for (int i = 0; i < alumnado.size(); i++) {
+                listado[i] = alumnado.get(i).getNombre();
+                
+            }
+
+            //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
+            if (JOptionPane.showConfirmDialog(null, "¿Hay voluntarios?", "Veamos",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                Object valiente = JOptionPane.showInputDialog(null, "¿Quién es el valiente?", "Valiente", JOptionPane.QUESTION_MESSAGE, null, listado, listado);
+                JOptionPane.showMessageDialog(null, "Ánimo " + valiente.toString() + ", ya tienes un positivillo");
+                for (int i = 0; i < alumnado.size(); i++) {
+                    if (alumnado.get(i).getNombre().equalsIgnoreCase(valiente.toString())) {
+                        alumnado.get(i).setPositivos(alumnado.get(i).getPositivos() + 1);
+                    }
+
                 }
-                alumnado.remove(elegidos);
-            } while (result != 0);
+            } else {
+                do {
+                    elegidos = rd.nextInt(alumnado.size());
+                    result = JOptionPane.showOptionDialog(null, "¿Tienes hecha la tarea?\n" + alumnado.get(elegidos).getNombre(), "Responde", 0, JOptionPane.QUESTION_MESSAGE, null, opcion, "");
+                    switch (result) {
+                        case 0:
+                            JOptionPane.showMessageDialog(null, "Muy bien " + alumnado.get(elegidos).getNombre() + ", ganaste un positivillo.");
+                            alumnado.get(elegidos).setPositivos(alumnado.get(elegidos).getPositivos() + 1);
+
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Mal vamos " + alumnado.get(elegidos).getNombre() + "...");
+                            alumnado.get(elegidos).setNegativos(alumnado.get(elegidos).getNegativos() + 1);
+
+                            break;
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "Pues nada, pasamos a otro.");
+                            alumnado.get(elegidos).setFaltas(alumnado.get(elegidos).getFaltas() + 1);
+
+                            break;
+                    }
+                    alumnosQuitados.add(alumnado.get(elegidos));
+                    alumnado.remove(elegidos);
+                } while (result != 0);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        for (int i = 0; i < alumnosQuitados.size(); i++) {
+            alumnado.add(alumnosQuitados.get(i));
 
         }
+        actualizarDocumento(idFichero, alumnado);
 
     }
 
+    private static void actualizarDocumento(String ruta, ArrayList<Alumno> lista) {
+        try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(ruta))) {
+
+            flujo.write("Lista de Alumnos" + ";");
+            flujo.write("Positivos" + ";");
+            flujo.write("Negativos" + ";");
+            flujo.write("Faltas");
+            flujo.newLine();
+
+            for (int i = 0; i < lista.size(); i++) {
+                flujo.write(lista.get(i).getNombre() + ";");
+                flujo.write(lista.get(i).getPositivos() + ";");
+                flujo.write(lista.get(i).getNegativos() + ";");
+                flujo.write(lista.get(i).getFaltas() + ";");
+                flujo.newLine();
+
+            }
+
+            flujo.flush();
+            System.out.println("Fichero " + ruta + " actualizado correctamente.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
