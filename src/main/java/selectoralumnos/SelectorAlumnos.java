@@ -9,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -29,6 +27,22 @@ public class SelectorAlumnos {
         //Elegimos al alumno que saldrá
         elegirAlumno();
 
+    }
+
+    private static void comprobarDocumento() {
+        String filePath = "Alumnos.csv";
+
+        Path path = Paths.get(filePath);
+
+        boolean existe = Files.exists(path);
+        boolean noExiste = Files.notExists(path);
+
+        if (existe) {
+            System.out.println("El Archivo ya existe");
+        } else {
+            System.out.println("El archivo no existe.\n Creando archivo.");
+            crearDocumento();
+        }
     }
 
     private static void crearDocumento() {
@@ -51,9 +65,9 @@ public class SelectorAlumnos {
         alumnado.add(new Alumno("Tomás Ariel", " González Atienza", 0, 0, 0));
         alumnado.add(new Alumno("Aiman", " Harrar Daoud", 0, 0, 0));
         alumnado.add(new Alumno("Jorge", " Hernández Puertas", 0, 0, 0));
-        alumnado.add(new Alumno("Samuel", " Jiménez Mazas", 0, 0, 0));
+        alumnado.add(new Alumno("Samuel Alejandro", " Jiménez Mazas", 0, 0, 0));
         alumnado.add(new Alumno("Nerea", " López Sánchez", 0, 0, 0));
-        alumnado.add(new Alumno("Maria", " Juliana Luna Giovanetti", 0, 0, 0));
+        alumnado.add(new Alumno("Maria Juliana", "Luna Giovanetti", 0, 0, 0));
         alumnado.add(new Alumno("Juan Diego", " Marín Morale", 0, 0, 0));
         alumnado.add(new Alumno("Adrián", " Martel Romero", 0, 0, 0));
         alumnado.add(new Alumno("Álvaro", " Martínez Flores", 0, 0, 0));
@@ -100,22 +114,6 @@ public class SelectorAlumnos {
             System.out.println(e.getMessage());
         }
 
-    }
-
-    private static void comprobarDocumento() {
-        String filePath = "Alumnos.csv";
-
-        Path path = Paths.get(filePath);
-
-        boolean existe = Files.exists(path);
-        boolean noExiste = Files.notExists(path);
-
-        if (existe) {
-            System.out.println("El Archivo ya existe");
-        } else {
-            System.out.println("El archivo no existe.\n Creando archivo.");
-            crearDocumento();
-        }
     }
 
     private static void elegirAlumno() {
