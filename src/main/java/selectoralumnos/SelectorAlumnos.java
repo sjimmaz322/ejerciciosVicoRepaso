@@ -19,9 +19,6 @@ import javax.swing.JOptionPane;
  */
 public class SelectorAlumnos {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         //Comprobamos si el documento existe, en caso de que no exista lo creamos.
@@ -76,12 +73,14 @@ public class SelectorAlumnos {
         //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(idFichero))) {
 
+            //Guardamos el encabezado del documento
             flujo.write("Lista de Alumnos" + ";");
             flujo.write("Positivos" + ";");
             flujo.write("Negativos" + ";");
-            flujo.write("Faltas");
+            flujo.write("Faltas" + ";");
             flujo.newLine();
 
+            //Por cada objeto creamos un registro
             for (int i = 0; i < alumnado.size(); i++) {
                 flujo.write(alumnado.get(i).getNombre() + ";");
                 flujo.write(alumnado.get(i).getPositivos() + ";");
@@ -91,7 +90,7 @@ public class SelectorAlumnos {
 
             }
 
-            flujo.flush();
+            flujo.flush();//Guardamos todo en el documento
             System.out.println("Fichero " + idFichero + " creado correctamente.");
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -147,13 +146,15 @@ public class SelectorAlumnos {
                 // Se guarda en el array de String cada elemento de la
                 // línea en función del carácter separador de campos del fichero CSV
                 tokens = linea.split(";");
-
+                
+                //Añadimos cada parte del documento a un nuevo objeto Alumno
                 alumnado.add(new Alumno(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
 
             }
+            //Creamos una lista para mostrar los nombres de los alumnos en el menú desplegable
             for (int i = 0; i < alumnado.size(); i++) {
                 listado[i] = alumnado.get(i).getNombre();
-                
+
             }
 
             //if-else con do-while para la selección de quien saldrá y si cumple los requisitos
@@ -188,6 +189,7 @@ public class SelectorAlumnos {
 
                             break;
                     }
+                    //Añade el objeto modificado a una nueva lista y lo elimina de la lista original
                     alumnosQuitados.add(alumnado.get(elegidos));
                     alumnado.remove(elegidos);
                 } while (result != 0);
@@ -197,15 +199,18 @@ public class SelectorAlumnos {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        //Añadimos los alumnos que han sido modificados a la lista original para tener una lista actualizada
         for (int i = 0; i < alumnosQuitados.size(); i++) {
             alumnado.add(alumnosQuitados.get(i));
 
         }
+        //Llamamos al método actualizar documento
         actualizarDocumento(idFichero, alumnado);
 
     }
 
     private static void actualizarDocumento(String ruta, ArrayList<Alumno> lista) {
+        //Misma estructura para escribir en el documento pero con las listas actualizadas
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(ruta))) {
 
             flujo.write("Lista de Alumnos" + ";");
