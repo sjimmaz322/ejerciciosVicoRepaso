@@ -83,17 +83,10 @@ public class Alumno {
             return false;
         }
         final Alumno other = (Alumno) obj;
-        if (this.positivos != other.positivos) {
-            return false;
-        }
-        if (this.negativos != other.negativos) {
-            return false;
-        }
-        if (this.faltas != other.faltas) {
-            return false;
-        }
         return Objects.equals(this.nombre, other.nombre);
     }
+
+    
 
     @Override
     public String toString() {
