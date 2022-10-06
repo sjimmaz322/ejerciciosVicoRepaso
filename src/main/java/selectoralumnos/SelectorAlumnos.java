@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class SelectorAlumnos {
 
+    private static final String RUTA = "Alumnos.csv";
+
     public static void main(String[] args) {
 
         //Comprobamos si el documento existe, en caso de que no exista lo creamos.
@@ -30,12 +32,10 @@ public class SelectorAlumnos {
     }
 
     private static void comprobarDocumento() {
-        String filePath = "Alumnos.csv";
 
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(RUTA);
 
         boolean existe = Files.exists(path);
-        boolean noExiste = Files.notExists(path);
 
         if (existe) {
             System.out.println("El Archivo ya existe");
@@ -48,9 +48,6 @@ public class SelectorAlumnos {
     private static void crearDocumento() {
         //Creamos en ArrayList para contener la lista de alumnos
         ArrayList<Alumno> alumnado = new ArrayList<>();
-
-        //Creamos el nombre y la ruta del archivo
-        String idFichero = "Alumnos.csv";
 
         //Rellenamos el ArrayList con los alumnos
         alumnado.add(new Alumno("Clara Isabel", "Álvarez Aragón", 0, 0, 0));
@@ -87,7 +84,7 @@ public class SelectorAlumnos {
         alumnado.add(new Alumno("Miguel Ángel", " Victoria Marín", 0, 0, 0));
 
         //Rellenamos el csv con los datos de los alumnos
-        try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(idFichero))) {
+        try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(RUTA))) {
 
             //Guardamos el encabezado del documento
             flujo.write("Lista de" + ";");
@@ -109,7 +106,7 @@ public class SelectorAlumnos {
             }
 
             flujo.flush();//Guardamos todo en el documento
-            System.out.println("Fichero " + idFichero + " creado correctamente.");
+            System.out.println("Fichero " + RUTA + " creado correctamente.");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -122,7 +119,7 @@ public class SelectorAlumnos {
 
         //Creamos las variables necesarias.
         int elegidos, result;
-        String idFichero = "Alumnos.csv";
+
         ArrayList<Alumno> alumnado = new ArrayList<>();
         ArrayList<Alumno> alumnosQuitados = new ArrayList<>();
         String[] listado = new String[32];
@@ -134,12 +131,12 @@ public class SelectorAlumnos {
         String[] tokens;
         String linea;
 
-        System.out.println("Leyendo el fichero: " + idFichero);
+        System.out.println("Leyendo el fichero: " + RUTA);
 
         // Inicialización del flujo "datosFichero" en función del archivo llamado "idFichero"
         // Estructura try-with-resources. Permite cerrar los recursos una vez finalizadas
         // las operaciones con el archivo
-        try ( Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
+        try ( Scanner datosFichero = new Scanner(new File(RUTA), "UTF-8")) {
             // hasNextLine devuelve true mientras haya líneas por leer
             datosFichero.nextLine();
             while (datosFichero.hasNextLine()) {
@@ -210,7 +207,7 @@ public class SelectorAlumnos {
         }
 
         //Llamamos al método actualizar documento
-        actualizarDocumento(idFichero, alumnado);
+        actualizarDocumento(RUTA, alumnado);
 
     }
 
