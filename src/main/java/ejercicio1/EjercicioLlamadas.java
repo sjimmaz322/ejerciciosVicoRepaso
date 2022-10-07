@@ -156,7 +156,7 @@ public class EjercicioLlamadas {
 
         aux.setFechaHoraFin(LocalDateTime.of(anio, mes, dia, horas, minutos));
 
-        long diferencia = Duration.between(aux.getFechaHoraInicio(), aux.getFechaHoraFin()).toSeconds();
+        long diferencia = Duration.between(aux.getFechaHoraInicio(), aux.getFechaHoraFin()).toMinutes();
         aux.setDuracion(diferencia);
 
         return aux;
