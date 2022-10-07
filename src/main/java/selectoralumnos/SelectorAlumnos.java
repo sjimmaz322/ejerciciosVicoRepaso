@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -59,29 +61,29 @@ public class SelectorAlumnos {
         alumnado.add(new Alumno("Cristina", "Delgado Castillo", 0, 0, 0));
         alumnado.add(new Alumno("Erick", "G", 0, 0, 0));
         alumnado.add(new Alumno("José Ángel", "Gómez Morillo", 0, 0, 0));
-        alumnado.add(new Alumno("Tomás Ariel", " González Atienza", 0, 0, 0));
-        alumnado.add(new Alumno("Aiman", " Harrar Daoud", 0, 0, 0));
-        alumnado.add(new Alumno("Jorge", " Hernández Puertas", 0, 0, 0));
-        alumnado.add(new Alumno("Samuel Alejandro", " Jiménez Mazas", 0, 0, 0));
-        alumnado.add(new Alumno("Nerea", " López Sánchez", 0, 0, 0));
+        alumnado.add(new Alumno("Tomás Ariel", "González Atienza", 0, 0, 0));
+        alumnado.add(new Alumno("Aiman", "Harrar Daoud", 0, 0, 0));
+        alumnado.add(new Alumno("Jorge", "Hernández Puertas", 0, 0, 0));
+        alumnado.add(new Alumno("Samuel Alejandro", "Jiménez Mazas", 0, 0, 0));
+        alumnado.add(new Alumno("Nerea", "López Sánchez", 0, 0, 0));
         alumnado.add(new Alumno("Maria Juliana", "Luna Giovanetti", 0, 0, 0));
-        alumnado.add(new Alumno("Juan Diego", " Marín Morale", 0, 0, 0));
-        alumnado.add(new Alumno("Adrián", " Martel Romero", 0, 0, 0));
-        alumnado.add(new Alumno("Álvaro", " Martínez Flores", 0, 0, 0));
-        alumnado.add(new Alumno("Fernando", " Martínez Ortiz", 0, 0, 0));
-        alumnado.add(new Alumno("David", " Mena Jiménez", 0, 0, 0));
-        alumnado.add(new Alumno("Pablo", " Navarro García", 0, 0, 0));
-        alumnado.add(new Alumno("Alejandro", " Neal Chirino", 0, 0, 0));
-        alumnado.add(new Alumno("Noelia", " Pérez González", 0, 0, 0));
-        alumnado.add(new Alumno("Antonio", " Ramírez Navas", 0, 0, 0));
-        alumnado.add(new Alumno("Alexey", " Riazantsev", 0, 0, 0));
-        alumnado.add(new Alumno("Darío", " Rico García", 0, 0, 0));
-        alumnado.add(new Alumno("José Antonio", " Ruiz Jiménez", 0, 0, 0));
-        alumnado.add(new Alumno("Jose Ignacio", " Salcedo Guarde", 0, 0, 0));
-        alumnado.add(new Alumno("Victoria", " Sampalo García", 0, 0, 0));
-        alumnado.add(new Alumno("Ismael", " Shehata Pérez", 0, 0, 0));
-        alumnado.add(new Alumno("José Ángel", " Tierra Vera", 0, 0, 0));
-        alumnado.add(new Alumno("Miguel Ángel", " Victoria Marín", 0, 0, 0));
+        alumnado.add(new Alumno("Juan Diego", "Marín Morale", 0, 0, 0));
+        alumnado.add(new Alumno("Adrián", "Martel Romero", 0, 0, 0));
+        alumnado.add(new Alumno("Álvaro", "Martínez Flores", 0, 0, 0));
+        alumnado.add(new Alumno("Fernando", "Martínez Ortiz", 0, 0, 0));
+        alumnado.add(new Alumno("David", "Mena Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Pablo", "Navarro García", 0, 0, 0));
+        alumnado.add(new Alumno("Alejandro", "Neal Chirino", 0, 0, 0));
+        alumnado.add(new Alumno("Noelia", "Pérez González", 0, 0, 0));
+        alumnado.add(new Alumno("Antonio", "Ramírez Navas", 0, 0, 0));
+        alumnado.add(new Alumno("Alexey", "Riazantsev", 0, 0, 0));
+        alumnado.add(new Alumno("Darío", "Rico García", 0, 0, 0));
+        alumnado.add(new Alumno("José Antonio", "Ruiz Jiménez", 0, 0, 0));
+        alumnado.add(new Alumno("Jose Ignacio", "Salcedo Guarde", 0, 0, 0));
+        alumnado.add(new Alumno("Victoria", "Sampalo García", 0, 0, 0));
+        alumnado.add(new Alumno("Ismael", "Shehata Pérez", 0, 0, 0));
+        alumnado.add(new Alumno("José Ángel", "Tierra Vera", 0, 0, 0));
+        alumnado.add(new Alumno("Miguel Ángel", "Victoria Marín", 0, 0, 0));
 
         //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(RUTA))) {
@@ -212,6 +214,10 @@ public class SelectorAlumnos {
     }
 
     private static void actualizarDocumento(String ruta, ArrayList<Alumno> lista) {
+
+        //Ordenamos la lista por apellidos
+        ordenarlista(lista);
+
         //Misma estructura para escribir en el documento pero con las listas actualizadas
         //Rellenamos el csv con los datos de los alumnos
         try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(ruta))) {
@@ -240,6 +246,16 @@ public class SelectorAlumnos {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static void ordenarlista(ArrayList<Alumno> aux) {
+        Collections.sort(aux, new Comparator<Alumno>() {
+            @Override
+            public int compare(Alumno a1, Alumno a2) {
+                return a1.getApellido().compareTo(a2.getApellido());
+            }
+        });
+
     }
 
 }
