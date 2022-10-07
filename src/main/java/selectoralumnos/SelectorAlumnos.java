@@ -58,7 +58,7 @@ public class SelectorAlumnos {
         alumnado.add(new Alumno("Eduardo", "Correa Aranda", 0, 0, 0));
         alumnado.add(new Alumno("Guerig Eri", "Cuchallo Jaldin", 0, 0, 0));
         alumnado.add(new Alumno("Elisabet", "D'Acosta Almirón", 0, 0, 0));
-        alumnado.add(new Alumno("Cristina", "Delgado Castillo", 0, 0, 0));
+        alumnado.add(new Alumno("Cristina", "Delgado Gallardo", 0, 0, 0));
         alumnado.add(new Alumno("Erick", "G", 0, 0, 0));
         alumnado.add(new Alumno("José Ángel", "Gómez Morillo", 0, 0, 0));
         alumnado.add(new Alumno("Tomás Ariel", "González Atienza", 0, 0, 0));
