@@ -1,5 +1,6 @@
 package ejercicio1;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -11,22 +12,26 @@ public class Llamada {
 
     private String id, numeroOrigen, numeroDestino;
     private LocalDateTime fechaHoraInicio, fechaHoraFin;
+    private long duracion;
 
     public Llamada() {
         String id = "";
         String numeroOrigen = "";
         String numeroDestino = "";
-        LocalDateTime fechaHOraInicio = LocalDateTime.now();
+        LocalDateTime fechaHoraInicio = LocalDateTime.now();
         LocalDateTime ferchaHoraFin = LocalDateTime.now();
+        long duracion = 0L;
 
     }
 
-    public Llamada(String id, String numeroOrigen, String numeroDestino, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin) {
+    public Llamada(String id, String numeroOrigen, String numeroDestino, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin, long duracion) {
         this.id = id;
         this.numeroOrigen = numeroOrigen;
         this.numeroDestino = numeroDestino;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
+        this.duracion = duracion;
+
     }
 
     public String getId() {
@@ -69,14 +74,23 @@ public class Llamada {
         this.fechaHoraFin = fechaHoraFin;
     }
 
+    public long getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(long duracion) {
+        this.duracion = duracion;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.numeroOrigen);
-        hash = 83 * hash + Objects.hashCode(this.numeroDestino);
-        hash = 83 * hash + Objects.hashCode(this.fechaHoraInicio);
-        hash = 83 * hash + Objects.hashCode(this.fechaHoraFin);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.numeroOrigen);
+        hash = 53 * hash + Objects.hashCode(this.numeroDestino);
+        hash = 53 * hash + Objects.hashCode(this.fechaHoraInicio);
+        hash = 53 * hash + Objects.hashCode(this.fechaHoraFin);
+        hash = 53 * hash + (int) (this.duracion ^ (this.duracion >>> 32));
         return hash;
     }
 
@@ -92,6 +106,9 @@ public class Llamada {
             return false;
         }
         final Llamada other = (Llamada) obj;
+        if (this.duracion != other.duracion) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -113,7 +130,8 @@ public class Llamada {
                 + ", con número de origen: " + numeroOrigen
                 + ", con número de destino: " + numeroDestino
                 + ", iniciada en: " + fechaHoraInicio
-                + " y finalizada en :" + fechaHoraFin + ".";
+                + " y finalizada en :" + fechaHoraFin
+                + " con una duración de " + duracion + " segundos.";
     }
 
 }

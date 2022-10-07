@@ -4,10 +4,13 @@
  */
 package ejercicio1;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +24,7 @@ public class EjercicioLlamadas {
         //Creamos un ArrayList para guardar las llamadas
         ArrayList<Llamada> listadoLlamadas = new ArrayList<Llamada>();
 
-        int eleccion, identificador = 1;
+        int eleccion;
 
         do {
             eleccion = JOptionPane.YES_NO_OPTION;
@@ -39,6 +42,8 @@ public class EjercicioLlamadas {
                 //Código para elección de no
                 int eleccion2 = JOptionPane.showOptionDialog(null, "Seleccione como desea ver la información", "Seleccione", 0, JOptionPane.QUESTION_MESSAGE, null, options, "");
                 eleccion = 1;
+                //Ordenamos las llamadas por duración de menor a mayor
+                ordenarLlamadas(listadoLlamadas);
 
                 switch (eleccion2) {
                     case 0:
@@ -151,11 +156,26 @@ public class EjercicioLlamadas {
 
         aux.setFechaHoraFin(LocalDateTime.of(anio, mes, dia, horas, minutos));
 
+        long diferencia = Duration.between(aux.getFechaHoraInicio(), aux.getFechaHoraFin()).toSeconds();
+        aux.setDuracion(diferencia);
+
         return aux;
     }
 
     private static int stringToInt(String aux) {
         int num = Integer.parseInt(aux);
         return num;
+    }
+
+    private static ArrayList<Llamada> ordenarLlamadas(ArrayList<Llamada> aux) {
+
+        Collections.sort(aux, new Comparator<Llamada>() {
+            @Override
+            public int compare(Llamada l1, Llamada l2) {
+                return (int) l1.getDuracion() - (int) l2.getDuracion();
+            }
+        });
+        return aux;
+
     }
 }
