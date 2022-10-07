@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejerciciollamadas;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
